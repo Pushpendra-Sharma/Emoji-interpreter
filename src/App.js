@@ -1,20 +1,50 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+const emojiDictionary = {
+  "🍋": "lemon",
+  "🥭": "mango",
+  "🍐": "pear",
+  "🍓": "strawberry",
+  "🍉": "watermelon",
+  "🍌": "banana",
+  "🍎": "red apple",
+  "🫐": "blueberries",
+  "🥝": "kiwi fruit",
+  "🍇": "grapes",
+  "🍊": "tangerine",
+  "🍍": "pineapple",
+  "🍏": "green apple",
+  "🍒": "cherries",
+  "🍈": "melon",
+  "🥑": "avacado"
+};
+
 export default function App() {
-  const [counter, setCounter] = useState(0);
+  const [meaning, setMeaning] = useState("");
 
-  function clickHandler() {
-    var newValue = counter + 1;
-    setCounter(newValue);
+  function emojiInputHandler() {
+    var userInput = event.target.value;
+
+    //for variable key in object
+    var emojiMeaning = emojiDictionary[userInput];
+    //emojiDictionary.key
+
+    if (emojiMeaning === undefined) {
+      emojiMeaning = "Unknown";
+    }
+    setMeaning(emojiMeaning);
   }
-
-  console.log("clicked", counter);
 
   return (
     <div>
       <h1>Emoji-interpreter</h1>
-      <button onClick={clickHandler}>Click here</button> {counter}
+      <input placeholder="enter emoji" onChange={emojiInputHandler}></input>
+      <div>{meaning}</div>
     </div>
   );
 }
+//console.log(event.target.value);
+//onChange is event
+//target of event is the input tag
+//value =value of target

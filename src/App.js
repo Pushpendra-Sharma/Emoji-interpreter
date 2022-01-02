@@ -20,6 +20,8 @@ const emojiDictionary = {
   "🥑": "avacado"
 };
 
+var emojis = Object.keys(emojiDictionary);
+
 export default function App() {
   const [meaning, setMeaning] = useState("");
 
@@ -36,15 +38,26 @@ export default function App() {
     setMeaning(emojiMeaning);
   }
 
+  function emojiClickHandler(emoji) {
+    var emojiMeaning = emojiDictionary[emoji];
+    setMeaning(emojiMeaning);
+  }
+
   return (
-    <div>
+    <div className="App">
       <h1>Emoji-interpreter</h1>
       <input placeholder="enter emoji" onChange={emojiInputHandler}></input>
       <div>{meaning}</div>
+      <h3>Emojis we know</h3>
+      {emojis.map((emoji) => (
+        <span
+          onClick={() => emojiClickHandler(emoji)}
+          style={{ fontSize: "3rem", padding: "1rem" }}
+          key={emoji}
+        >
+          {emoji}{" "}
+        </span>
+      ))}
     </div>
   );
 }
-//console.log(event.target.value);
-//onChange is event
-//target of event is the input tag
-//value =value of target
